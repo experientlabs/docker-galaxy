@@ -60,4 +60,7 @@ RUN mkdir -p /home/$UNAME/app
 WORKDIR /home/$UNAME/app
 
 # Start a shell session when the container runs
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
+
+# Use a non-blocking command to keep the container running
+CMD ["tail", "-f", "/dev/null"]
