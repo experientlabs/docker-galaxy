@@ -11,3 +11,7 @@ Write a script that downloads and installs updates for a specific package on a L
 Create a script that searches for specific text within files in a directory.
 Write a script that converts a CSV file to a JSON file.
 These projects will help you develop your shell scripting skills and give you practical experience working with common Unix tools. Good luck!
+
+
+https://www.dunebook.com/the-20-best-shell-scripting-project-ideas-to-improve-your-linux-skills/
+https://www.analyticsvidhya.com/blog/2022/01/etl-pipeline-using-shell-scripting-data-pipeline/
