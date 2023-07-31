@@ -18,7 +18,7 @@ RUN python --version && pip3 --version
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    ca-certificates curl zip unzip vim sudo && \
+    ca-certificates curl zip unzip vim sudo wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
