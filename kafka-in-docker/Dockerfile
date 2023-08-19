@@ -16,7 +16,7 @@ LABEL org.label-schema.name="kafka" \
 
 ENV KAFKA_VERSION=$kafka_version \
     SCALA_VERSION=$scala_version \
-    KAFKA_HOME=/opt/kafka
+    KAFKA_HOME=/home/kafka
 
 ENV PATH=${PATH}:${KAFKA_HOME}/bin
 
@@ -48,13 +48,11 @@ RUN set -eux ; \
     /tmp2/download-kafka.sh ; \
     tar xfz /tmp2/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt ; \
     rm /tmp2/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz ; \
-    ln -s /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} ; \
+    ln -s /home/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} ; \
     rm -rf /tmp2 ; \
     rm -rf /var/lib/apt/lists/*
 
-COPY overrides /opt/overrides
-
-VOLUME ["/kafka"]
+COPY overrides /home/overrides
 
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
 CMD ["start-kafka.sh"]
