@@ -46,7 +46,7 @@ RUN set -eux ; \
     mv /tmp2/start-kafka.sh /tmp2/broker-list.sh /tmp2/create-topics.sh /tmp2/versions.sh /usr/bin ; \
     sync ; \
     /tmp2/download-kafka.sh ; \
-    tar xfz /tmp2/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt ; \
+    tar xfz /tmp2/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /home ; \
     rm /tmp2/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz ; \
     ln -s /home/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} ; \
     rm -rf /tmp2 ; \
