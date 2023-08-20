@@ -7,3 +7,9 @@ For instructions on how to build and run docker container, please refer the read
 directory.
 
 ![img.png](resources%2Fimg.png)
+
+
+
+
+https://github.com/31z4/zookeeper-docker
+https://github.com/bitnami/containers/tree/main/bitnami/zookeeper
