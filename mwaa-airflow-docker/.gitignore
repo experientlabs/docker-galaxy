@@ -4,4 +4,3 @@ dags/**/*.pyc
 /.idea
 /logs
 /db-data
-.DS_Store
