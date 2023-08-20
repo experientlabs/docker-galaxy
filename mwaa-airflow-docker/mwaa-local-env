@@ -52,8 +52,12 @@ validate_prereqs() {
    fi
 }
 
+generate_ssh_keys(){
+  rm -rf "./docker/id_rsa" && ssh-keygen -t rsa -C "ex2@gmail.com" -f "./docker/id_rsa" -P "" -q
+}
+
 build_image() {
-   docker build --rm --compress -t amazon/mwaa-local:$AIRFLOW_VERSION ./docker
+  docker build --rm --compress -t amazon/mwaa-local:$AIRFLOW_VERSION ./docker
 }
 
 case "$1" in
