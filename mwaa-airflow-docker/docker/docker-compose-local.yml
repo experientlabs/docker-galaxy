@@ -2,6 +2,8 @@ version: '3.7'
 services:
     postgres:
         image: postgres:10-alpine
+        networks:
+            - common
         environment:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
@@ -12,24 +14,45 @@ services:
                 max-file: "3"
         volumes:
             - "${PWD}/db-data:/var/lib/postgresql/data"
+        ports:
+            - "5151:5151"
+
+    ex2:
+        image: ex2:latest
+        networks:
+            - common
+        volumes:
+            - "${ROOT_DIR}/python-library:/var/lib/my-python/python-library"
+            - "${ROOT_DIR}/dwh-etl-code:/var/lib/my-python/dwh-etl-code"
+        ports:
+            - "2020:2020"
 
     local-runner:
         image: amazon/mwaa-local:2_6
         restart: always
+        network:
+            - common
         depends_on:
             - postgres
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
+            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=posgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+            - ROOT_DIR=${ROOT_DIR}
+            - AIRFLOW_USER_SSH_CONNECTION_ID=ssh_ex2_local
         logging:
             options:
                 max-size: 10m
                 max-file: "3"
         volumes:
             - "${PWD}/dags:/usr/local/airflow/dags"
+            - "${PWD}/plugins:/usr/local/airflow/plugins/common"
+            - "${PWD}/plugins:/usr/local/airflow/plugins/util"
             - "${PWD}/plugins:/usr/local/airflow/plugins"
             - "${PWD}/requirements:/usr/local/airflow/requirements"
             - "${PWD}/startup_script:/usr/local/airflow/startup"
+            - "${PWD}/startup_script:/usr/local/airflow-pipeline-code"
+            - "${PWD}/startup_script:/usr/local/dwh-elt-code"
         ports:
             - "8080:8080"
         command: local-runner
@@ -40,3 +63,6 @@ services:
             retries: 3
         env_file:
             - ./config/.env.localrunner
+
+networks:
+    common:
