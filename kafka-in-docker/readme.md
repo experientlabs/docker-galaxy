@@ -23,3 +23,11 @@ The docker run command in start-kafka-shell script mounts docker.sock file. Expl
 ```
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 -e ZK=$2 -i -t experient-labs/kafka /bin/bash
 ```
+
+
+
+
+
+REFERENCE
+https://github.com/confluentinc/kafka-images
+https://github.com/bitnami/containers/tree/main/bitnami/kafka
