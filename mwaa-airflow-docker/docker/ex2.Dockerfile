@@ -15,23 +15,23 @@ RUN mkdir -p /var/lib/my-python
 RUN chown -R ex2 /var/lib/my-python
 RUN service ssh start
 
-ARG YM_JOB_ENVIRONMENT=${YM_JOB_ENVIRONMENT}
+ARG MY_JOB_ENVIRONMENT=${MY_JOB_ENVIRONMENT}
 ARG SAVE_TEMP_TABLES=${SAVE_TEMP_TABLES}
-ARG YM_SNOWFLAKE_WAREHOUSE_OVERRIDE=${YM_SNOWFLAKE_WAREHOUSE_OVERRIDE}
-ARG YM_SNOWFLAKE_DATABASE_OVERRIDE=${YM_SNOWFLAKE_DATABASE_OVERRIDE}
+ARG MY_SNOWFLAKE_WAREHOUSE_OVERRIDE=${MY_SNOWFLAKE_WAREHOUSE_OVERRIDE}
+ARG MY_SNOWFLAKE_DATABASE_OVERRIDE=${MY_SNOWFLAKE_DATABASE_OVERRIDE}
 ARG AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
 ARG AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 ARG AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
 ARG AWS_CLI_DOWNLOAD_PATH=${AWS_CLI_DOWNLOAD_PATH}
 ARG S3_TO_DATAWAREHOUSE_JAR=${S3_TO_DATAWAREHOUSE_JAR}
-RUN mkdir -p /usr/local/s3-to-datawarehouse && chown ex2:ex2 /usr/local/s3-to-datawarehouse
+
 
 USER ex2
 RUN mkdir -p /home/ex2/environments
 RUN mkdir /home/ex2/.ssh && chmod 700 /home/ex2/.ssh
-RUN echo "export YM_JOB_ENVIRONMENT=$YM_JOB_ENVIRONMENT" > /home/ex2/.bash_profile && \
-    echo "export YM_SNOWFLAKE_WAREHOUSE_OVERRIDE=$YM_SNOWFLAKE_WAREHOUSE_OVERRIDE" > /home/ex2/.bash_profile && \
-    echo "export YM_SNOWFLAKE_DATABASE_OVERRIDE=$YM_SNOWFLAKE_DATABASE_OVERRIDE" > /home/ex2/.bash_profile && \
+RUN echo "export MY_JOB_ENVIRONMENT=$MY_JOB_ENVIRONMENT" > /home/ex2/.bash_profile && \
+    echo "export MY_SNOWFLAKE_WAREHOUSE_OVERRIDE=$MY_SNOWFLAKE_WAREHOUSE_OVERRIDE" > /home/ex2/.bash_profile && \
+    echo "export MY_SNOWFLAKE_DATABASE_OVERRIDE=$MY_SNOWFLAKE_DATABASE_OVERRIDE" > /home/ex2/.bash_profile && \
     echo "export AWS_REGION=us-east-1" > /home/ex2/.bash_profile && \
     echo "export SAVE_TEMP_TABLES=$SAVE_TEMP_TABLES" > /home/ex2/.bash_profile && \
     mkdir -p /home/ex2/.aws && \
@@ -48,8 +48,7 @@ RUN chmod 600 /home/ex2/.ssh/authorized_keys && \
     pip3 install virtualenv && \
     /home/ex2/.local/bin/virtualenv /home/ex2/environments/my-virtualenv-python37 && \
     . /home/ex2/environments/my-virtualenv-python37/bin/activate && \
-    pip3 install /home/ex2/environments/requirements.txt \
-COPY *.jar /usr/local/s3-to-datawarehouse
+    pip3 install /home/ex2/environments/requirements.txt
 
 USER root
 EXPOSE 22
