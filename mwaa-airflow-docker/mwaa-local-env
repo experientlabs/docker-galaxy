@@ -56,9 +56,7 @@ generate_ssh_keys(){
   rm -rf "./docker/id_rsa" && ssh-keygen -t rsa -C "ex2@gmail.com" -f "./docker/id_rsa" -P "" -q
 }
 
-build_image() {
-  cp $ROOT_DIR/python-library/setup.py ./docker
-  cp $ROOT_DIR/*.jar ./docker
+build_image() {r
   docker build --rm --compress -t amazon/mwaa-local:$AIRFLOW_VERSION ./docker
 }
 

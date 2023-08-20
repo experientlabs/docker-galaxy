@@ -17,15 +17,6 @@ services:
         ports:
             - "5151:5151"
 
-    ex2:
-        image: ex2:latest
-        networks:
-            - common
-        volumes:
-            - "${ROOT_DIR}/python-library:/var/lib/my-python/python-library"
-            - "${ROOT_DIR}/dwh-etl-code:/var/lib/my-python/dwh-etl-code"
-        ports:
-            - "2020:2020"
 
     local-runner:
         image: amazon/mwaa-local:2_6

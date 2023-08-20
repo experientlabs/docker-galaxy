@@ -1,3 +1,0 @@
-[profile dev-test]
-role_arn = arn:aws:iam::xxxxxxxxxxx:role/Github-CICD_Test_Role-XXXXXX
-source_profile = dev_test_credentials
