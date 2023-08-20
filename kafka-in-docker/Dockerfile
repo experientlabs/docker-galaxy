@@ -52,7 +52,7 @@ RUN set -eux ; \
     rm -rf /tmp2 ; \
     rm -rf /var/lib/apt/lists/*
 
-COPY overrides /home/overrides
+# COPY overrides /home/overrides
 
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
 CMD ["start-kafka.sh"]
