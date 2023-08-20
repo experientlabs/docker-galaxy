@@ -21,16 +21,13 @@ services:
     local-runner:
         image: amazon/mwaa-local:2_6
         restart: always
-        network:
+        networks:
             - common
         depends_on:
             - postgres
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
-            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=posgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-            - ROOT_DIR=${ROOT_DIR}
-            - AIRFLOW_USER_SSH_CONNECTION_ID=ssh_ex2_local
         logging:
             options:
                 max-size: 10m
