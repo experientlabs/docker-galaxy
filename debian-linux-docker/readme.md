@@ -25,3 +25,7 @@ If you make any changes to the Dockerfile or source code, you can run docker-com
 ```
 docker-compose up --build
 ```
+
+https://sysdig.com/blog/dockerfile-best-practices/
+https://medium.com/@mccode/understanding-how-uid-and-gid-work-in-docker-containers-c37a01d01cf
+

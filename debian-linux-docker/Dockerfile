@@ -14,6 +14,35 @@ RUN apt-get update --yes && \
     ca-certificates curl zip unzip vim sudo wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+
+############################################
+# create group and user
+############################################
+
+ARG UNAME=sam
+ARG GID=1000
+ARG PASSWORD=mypwd
+
+RUN cat /etc/passwd
+
+# create group
+RUN groupadd -g $GID $UNAME
+
+# create a user without specifying UID
+RUN useradd -g $GID -m -s /bin/bash $UNAME
+
+# change permissions of the user's home directory
+RUN chown $UNAME:$GID /home/$UNAME
+
+# Set password for the user
+RUN echo "$UNAME:$PASSWORD" | chpasswd
+
+# give sudo access to the user
+RUN echo "$UNAME ALL=(ALL) ALL" >> /etc/sudoers
+
+
+
+
 # Set the working directory
 WORKDIR /app
 
