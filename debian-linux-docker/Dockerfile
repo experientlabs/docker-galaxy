@@ -41,11 +41,15 @@ RUN echo "$UNAME:$PASSWORD" | chpasswd
 RUN echo "$UNAME ALL=(ALL) ALL" >> /etc/sudoers
 
 
+###########################################
+# change working dir and user
+###########################################
 
+USER $UNAME
 
 # Set the working directory
-WORKDIR /app
-
+RUN mkdir -p /home/$UNAME/app
+WORKDIR /home/$UNAME/app
 
 # Set the entry point for running the Java application
 # CMD ["java", "-jar", "your-java-application.jar"]

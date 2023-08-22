@@ -9,7 +9,15 @@ To build the Docker image, navigate to the directory containing the Dockerfile a
 
 Once the image is built, you can run a container based on this image using the following command:
 
-```docker run -it my-docker-image```
+```docker run -it -v /var/run/docker.sock:/var/run/docker.sock my-docker-image```
+
+```
+hostfolder="$(pwd)" 
+# Convert the Unix-like path to Windows format using wslpath (runs in wsl shell)
+hostfolder_windows=$(wslpath -w "$hostfolder")
+dockerfolder="/home/sam/app"
+docker run -d --rm -it -v ${pwd}/app:"/home/sam/app" my-docker-image
+```
 
 
 ### Build Image using docker-compose
