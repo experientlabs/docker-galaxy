@@ -7,8 +7,12 @@ FROM python:3.10.9-buster
 RUN apt-get -y update
 # Upgrade already installed packages:
 RUN apt-get -y upgrade
-# Install a new package:
 
+# Install new packages:
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    ca-certificates curl zip unzip vim sudo wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /app
