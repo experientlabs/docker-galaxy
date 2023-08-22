@@ -16,7 +16,7 @@ hostfolder="$(pwd)"
 # Convert the Unix-like path to Windows format using wslpath (runs in wsl shell)
 hostfolder_windows=$(wslpath -w "$hostfolder")
 dockerfolder="/home/sam/app"
-docker run -d --rm -it -v ${pwd}/app:"/home/sam/app" my-docker-image
+docker run -d --rm -it -v $hostfolder/app:"/home/sam/app" my-docker-image
 ```
 
 
